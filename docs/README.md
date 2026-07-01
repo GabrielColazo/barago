@@ -4,7 +4,9 @@
 
 - **Frontend:** HTML + CSS (Bootstrap 5 + Sass) + JavaScript vanilla
 - **Backend:** Supabase (Auth, PostgreSQL, Storage)
-- **Hosting:** DonWeb (archivos estáticos) + Supabase cloud
+- **Hosting:** GitHub Pages (estáticos) + Supabase cloud
+- **Repo:** https://github.com/GabrielColazo/barago
+- **URL:** https://gabrielcolazo.github.io/barago/
 
 ## Supabase (gratis)
 
@@ -71,16 +73,31 @@
 3. Toca "Registrarse" (si es nuevo) o directamente "Publicar" (si ya está logueado)
 4. Se registra y publica en el mismo paso
 
+## Diseño
+
+- Logo: imagen `barago.webp` en header
+- Hero: gradiente verde clarito (#D1FAE5 → #FAFAFA), título "BaraGo" con "Go" en verde #059669
+- Header: fondo verde clarísimo (#F8FDFA), borde inferior verde tenue
+- Tipografía: Inter (Google Fonts)
+- Colores principales: #059669 (verde), #F59E0B (acento)
+
+## Correcciones aplicadas
+
+- Bug crítico: `eliminarAnuncio()` recursivo en `anuncio.html` (stack overflow) — corregido
+- Feedback post-publicación: banner verde al volver a `index.html?publicado=1`
+- Sanitización XSS: `escapeHtml()` en `index.html` y `anuncio.html`
+- CSS compilado en formato `expanded` (legible) para GitHub Pages
+
 ## Pendientes
 
 - [ ] Probar registro (confirmar usuario manual en Supabase o desactivar Confirm email)
-- [ ] Hostear en DonWeb
+- [ ] Configurar SITE_URL y Redirect URLs en Supabase Auth para GitHub Pages
 - [ ] (Opcional) Login con Google
 
 ## Estructura de archivos
 
 ```
-clasificados-local/
+barago/
 ├── index.html                # Home con listado de anuncios
 ├── login.html                # Login/Registro con email
 ├── publicar.html             # Publicar anuncio (registro inline)
@@ -90,7 +107,7 @@ clasificados-local/
 ├── migracion_telefono.sql    # Migración columna telefono
 ├── css/
 │   ├── main.scss
-│   ├── main.css              # Compilado
+│   ├── main.css              # Compilado (expandido)
 │   └── partials/
 │       ├── _variables.scss
 │       ├── _base.scss
@@ -104,7 +121,9 @@ clasificados-local/
 │   └── anuncios.js           # CRUD anuncios + imágenes
 ├── assets/
 │   └── img/
+│       ├── barago.webp        # Logo
 │       └── no-image.svg
+├── .gitignore
 └── docs/
     └── README.md             # (este archivo)
 ```
