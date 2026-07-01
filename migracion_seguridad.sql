@@ -9,7 +9,8 @@ ALTER TABLE anuncios ADD CONSTRAINT anuncios_telefono_length CHECK (char_length(
 ALTER TABLE anuncios ADD CONSTRAINT anuncios_descripcion_length CHECK (char_length(descripcion) <= 2000);
 
 -- 2. Eliminar columna imagen_url (no se usa, reemplazada por anuncio_imagenes)
-ALTER TABLE anuncios DROP COLUMN IF EXISTS imagen_url;
+-- Si da advertencia de operación destructiva, comentá la línea de abajo.
+-- ALTER TABLE anuncios DROP COLUMN IF EXISTS imagen_url;
 
 -- 3. Storage: política para que solo autenticados puedan subir archivos
 -- (Ejecutar en SQL Editor de Supabase > Storage > Policies)
