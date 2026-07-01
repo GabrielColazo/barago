@@ -41,7 +41,7 @@
 
       <div class="form-group">
         <label for="titulo">¿Qué estás vendiendo? *</label>
-        <input type="text" id="titulo" class="input-custom input-lg" placeholder="Ej: Bicicleta mountain bike" required autofocus>
+        <input type="text" id="titulo" class="input-custom input-lg" placeholder="Ej: Bicicleta mountain bike" maxlength="120" required autofocus>
       </div>
 
       <div class="form-group">
@@ -60,12 +60,12 @@
 
       <div class="form-group">
         <label for="telefono">Teléfono de contacto *</label>
-        <input type="tel" id="telefono" class="input-custom" placeholder="Ej: 11 5555-5555" required>
+        <input type="tel" id="telefono" class="input-custom" placeholder="Ej: 11 5555-5555" maxlength="30" required>
       </div>
 
       <div class="form-group">
         <label for="descripcion">Descripción (opcional)</label>
-        <textarea id="descripcion" class="textarea-custom" rows="3" placeholder="Contale un poco sobre tu producto..."></textarea>
+        <textarea id="descripcion" class="textarea-custom" rows="3" placeholder="Contale un poco sobre tu producto..." maxlength="2000"></textarea>
       </div>
 
       <div id="registro-inline" class="d-none" style="background:#F0FDF4;border:2px solid #86EFAC;border-radius:12px;padding:1.25rem;margin-top:1.5rem;transition:all 0.3s;">
@@ -120,7 +120,7 @@
       `).join('')
 
       if (sesion.data.session) {
-        indicator.innerHTML = `<div class="avatar" title="${sesion.data.session.user.email}">${sesion.data.session.user.email.charAt(0).toUpperCase()}</div>`
+        indicator.innerHTML = `<div class="avatar" title="${escHtml(sesion.data.session.user.email)}">${escHtml(sesion.data.session.user.email.charAt(0).toUpperCase())}</div>`
       } else {
         document.getElementById('alerta-registro').classList.remove('d-none')
         document.getElementById('registro-inline').classList.remove('d-none')
@@ -198,7 +198,7 @@
         errorEl.classList.remove('d-none')
 
         document.getElementById('user-indicator').innerHTML =
-          `<div class="avatar" title="${sesion.data.session.user.email}">${sesion.data.session.user.email.charAt(0).toUpperCase()}</div>`
+          `<div class="avatar" title="${escHtml(sesion.data.session.user.email)}">${escHtml(sesion.data.session.user.email.charAt(0).toUpperCase())}</div>`
       } catch (err) {
         errorEl.style.color = '#EF4444'
         errorEl.textContent = err.message
@@ -233,6 +233,20 @@
       if (!titulo || !precio || !telefono) {
         errorEl.style.color = '#EF4444'
         errorEl.textContent = !telefono ? 'Completá tu teléfono de contacto' : 'Completá el título y el precio'
+        errorEl.classList.remove('d-none')
+        return
+      }
+
+      if (Number(precio) <= 0) {
+        errorEl.style.color = '#EF4444'
+        errorEl.textContent = 'El precio debe ser mayor a cero'
+        errorEl.classList.remove('d-none')
+        return
+      }
+
+      if (titulo.length < 3) {
+        errorEl.style.color = '#EF4444'
+        errorEl.textContent = 'El título debe tener al menos 3 caracteres'
         errorEl.classList.remove('d-none')
         return
       }

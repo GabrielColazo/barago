@@ -89,6 +89,10 @@
 - CSS compilado en formato `expanded` (legible) para GitHub Pages
 - CSP headers agregados a todas las páginas
 - Sanitización XSS completa (escapeHtml en todos los templates)
+- Constraints en DB: precio >= 0, título 3-120 chars, teléfono 6-30 chars, descripción <= 2000 chars
+- Storage RLS: solo autenticados pueden subir, validación de tipo MIME y tamaño
+- Longitud máxima en inputs del formulario de publicación
+- Validación de precio > 0 y título >= 3 caracteres
 
 ## Pendientes
 
@@ -107,6 +111,7 @@ barago/
 ├── schema.sql                # SQL completo de la DB
 ├── migracion_imagenes.sql    # Migración tabla anuncio_imagenes
 ├── migracion_telefono.sql    # Migración columna telefono
+├── migracion_seguridad.sql   # Constraints + Storage RLS
 ├── css/
 │   ├── main.scss
 │   ├── main.css              # Compilado (expandido)
