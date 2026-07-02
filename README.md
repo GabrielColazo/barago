@@ -9,3 +9,4 @@ Clasificados locales para Baradero, Buenos Aires.
 - HTML + CSS (Bootstrap 5 + Sass) + JavaScript vanilla
 - Supabase (Auth, PostgreSQL, Storage)
 - Hosting: GitHub Pages
+
