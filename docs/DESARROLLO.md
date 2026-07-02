@@ -1,4 +1,4 @@
-# Barago — Clasificados Local
+# Barago — Desarrollo técnico
 
 ## Stack
 
