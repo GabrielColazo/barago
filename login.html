@@ -66,16 +66,26 @@
   <script src="https://accounts.google.com/gsi/client"></script>
   <script>
     let isLogin = true
+    let googleNonce = ''
+
+    function generarNonce() {
+      const arr = new Uint8Array(16)
+      crypto.getRandomValues(arr)
+      return btoa(String.fromCharCode(...arr)).replace(/[+/=]/g, '')
+    }
+
     function initGoogle() {
+      googleNonce = generarNonce()
       google.accounts.id.initialize({
         client_id: '973809022626-0k8o5hepl6v3o1pjunho87r1ki3107qd.apps.googleusercontent.com',
+        nonce: googleNonce,
         callback: (response) => {
           if (response.error) {
             document.getElementById('auth-error').textContent = 'Error al iniciar con Google'
             document.getElementById('auth-error').classList.remove('d-none')
             return
           }
-          handleGoogleIdToken(response.credential)
+          handleGoogleIdToken(response.credential, googleNonce)
         }
       })
     }
@@ -133,11 +143,12 @@
       google.accounts.id.prompt()
     }
 
-    async function handleGoogleIdToken(idToken) {
+    async function handleGoogleIdToken(idToken, nonce) {
       try {
         const { data, error } = await sb.auth.signInWithIdToken({
           provider: 'google',
-          token: idToken
+          token: idToken,
+          nonce
         })
         if (error) throw error
         window.location.href = 'https://gabrielcolazo.github.io/barago/publicar.html'
