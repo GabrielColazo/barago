@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirigiendo - Barago</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FAFAFA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #111827;
+    }
+    .card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      max-width: 360px;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #D1FAE5;
+      border-top-color: #059669;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h2 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    p { font-size: 0.9rem; color: #6B7280; }
+    a { color: #059669; font-weight: 600; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="spinner"></div>
+    <h2>Bienvenido a Barago</h2>
+    <p>Te estamos redirigiendo...</p>
+    <p style="margin-top:1rem;font-size:0.8rem;">
+      Si no sos redirigido, <a href="/barago/publicar.html">hacé click acá</a>
+    </p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase.js"></script>
+  <script>
+    (async () => {
+      try {
+        const { data: { session } } = await sb.auth.getSession()
+        if (session) {
+          window.location.href = 'publicar.html'
+        } else {
+          sb.auth.onAuthStateChange((event) => {
+            if (event === 'SIGNED_IN') {
+              window.location.href = 'publicar.html'
+            }
+          })
+        }
+        setTimeout(() => { window.location.href = 'publicar.html' }, 3000)
+      } catch {
+        window.location.href = 'publicar.html'
+      }
+    })()
+  </script>
+</body>
+</html>
