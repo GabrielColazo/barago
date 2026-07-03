@@ -90,6 +90,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - Logo: imagen `barago.webp` en header
 - Hero: gradiente verde clarito (#D1FAE5 → #FAFAFA), título "BaraGo" con "Go" en verde #059669
 - Header: fondo verde clarísimo (#F8FDFA), borde inferior verde tenue
+- Footer: fondo verde clarito (#F0FDF4), barra animada degradé en el borde superior (verde + ámbar), link a GaboWeb
 - Tipografía: Inter (Google Fonts)
 - Colores principales: #059669 (verde), #F59E0B (acento)
 
@@ -113,7 +114,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 ## Issues conocidos
 
 - GitHub Pages falla con "Node.js 20 is deprecated" (error de GitHub, temporal)
-- Email de confirmación de Supabase no llega (SMTP compartido bloqueado por proveedores)
+- Email de confirmación de Supabase con SendGrid SMTP funcionando (requiere CNAME en DonWeb para evitar spam/greylisting)
 
 ## Pendientes
 
