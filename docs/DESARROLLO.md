@@ -17,7 +17,7 @@
 - **Storage bucket:** `imagenes` (público)
 - **Auth providers:** Email/Contraseña, Google OAuth, Magic Link
 - **Google OAuth:** Client ID configurado en Google Cloud Console + Supabase Providers
-- **Magic Link:** `signInWithOtp` con `shouldCreateUser: true`, redirect a `publicar.html`
+- **Magic Link:** `signInWithOtp` con `shouldCreateUser: true`, redirect a `auth-callback.html`
 - **Redirect URLs:** `https://gabrielcolazo.github.io/barago/**` (wildcard)
 
 ## Base de datos
@@ -55,8 +55,14 @@
 
 ### RLS Policies activas
 - `categorias`: SELECT para todos
-- `anuncios`: SELECT todos, INSERT autenticados, UPDATE/DELETE propietario
-- `anuncio_imagenes`: SELECT todos, INSERT autenticados, DELETE propietario
+- `anuncios`: SELECT todos, INSERT autenticados (WITH CHECK usuario_id = auth.uid()), UPDATE/DELETE propietario
+- `anuncio_imagenes`: SELECT todos, INSERT autenticados (WITH CHECK true), DELETE propietario
+
+### CHECK constraints
+- `anuncios_precio_check`: precio >= 0
+- `anuncios_titulo_length`: char_length(titulo) BETWEEN 3 AND 120
+- `anuncios_telefono_length`: char_length(telefono) BETWEEN 6 AND 30
+- `anuncios_descripcion_length`: char_length(descripcion) <= 2000
 
 ## Skills instalados (skills.sh)
 
@@ -126,15 +132,24 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ### Métodos disponibles (login.html)
 
-| Método | Función | Estado |
-|--------|---------|--------|
-| Email + contraseña | `iniciarSesion()` / `registrar()` | ✅ Funciona |
-| Google | OAuth redirect (`signInWithOAuth`) | ✅ Funciona, muestra `supabase.co` |
-| Magic Link | `enviarMagicLink()` → `signInWithOtp` | ⏳ Pendiente CNAME en DonWeb |
+| Método | Función | Redirect | Estado |
+|--------|---------|----------|-------|
+| Email + contraseña | `iniciarSesion()` / `registrar()` | `auth-callback.html` (emailRedirectTo) | ✅ Funciona |
+| Google | OAuth redirect (`signInWithOAuth`) | `auth-callback.html` | ✅ Funciona, muestra `supabase.co` |
+| Magic Link | `enviarMagicLink()` → `signInWithOtp` | `auth-callback.html` | ⏳ Pendiente CNAME en DonWeb |
+
+### Auth redirect flow
+
+1. Todos los métodos de auth usan `AUTH_REDIRECT = 'https://gabrielcolazo.github.io/barago/auth-callback.html'`
+2. `auth-callback.html` recibe el redirect de Supabase, parsea la URL buscando errores
+3. Si hay error (`error`, `error_description` en query string o hash) → lo muestra en pantalla sin redirigir
+4. Si no hay error → llama `getSession()`, si hay sesión redirige a `publicar.html`
+5. Si no hay sesión → se suscribe a `onAuthStateChange` y redirige en `SIGNED_IN`
+6. Timeout de seguridad de 8s (cancelable si ya se redirigió por los pasos anteriores)
 
 ### Google — implementación
 
-- Se usa `sb.auth.signInWithOAuth({ provider: 'google' })` con redirect a `publicar.html`
+- Se usa `sb.auth.signInWithOAuth({ provider: 'google' })` con redirect a `auth-callback.html`
 - Google muestra `supabase.co` en el consent screen (normal al usar OAuth externo)
 - Para mostrar dominio propio se necesita flujo PKCE manual (pendiente)
 
@@ -172,10 +187,8 @@ barago/
 ├── publicar.html             # Publicar anuncio (registro inline)
 ├── anuncio.html              # Detalle del anuncio con galería
 ├── auth-callback.html         # Callback OAuth (reserva para PKCE)
-├── schema.sql                # SQL completo de la DB
-├── migracion_imagenes.sql    # Migración tabla anuncio_imagenes
-├── migracion_telefono.sql    # Migración columna telefono
-├── migracion_seguridad.sql   # Constraints + Storage RLS
+├── schema.sql                # SQL completo de la DB (fuente única)
+├── migraciones_aplicadas/    # Migraciones históricas (referencia)
 ├── css/
 │   ├── main.scss
 │   ├── main.css              # Compilado (expandido)
