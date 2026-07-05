@@ -61,34 +61,11 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
-  <script src="https://accounts.google.com/gsi/client"></script>
   <script>
     let isLogin = true
-    let googleNonce = ''
-
-    function generarNonce() {
-      const arr = new Uint8Array(16)
-      crypto.getRandomValues(arr)
-      return btoa(String.fromCharCode(...arr)).replace(/[+/=]/g, '')
-    }
-
-    function initGoogle() {
-      googleNonce = generarNonce()
-      google.accounts.id.initialize({
-        client_id: '973809022626-0k8o5hepl6v3o1pjunho87r1ki3107qd.apps.googleusercontent.com',
-        nonce: googleNonce,
-        callback: (response) => {
-          if (response.error) {
-            document.getElementById('auth-error').textContent = 'Error al iniciar con Google'
-            document.getElementById('auth-error').classList.remove('d-none')
-            return
-          }
-          handleGoogleIdToken(response.credential, googleNonce)
-        }
-      })
-    }
 
     function toggleAuth() {
       isLogin = !isLogin
@@ -139,23 +116,43 @@
       }
     }
 
-    function handleGoogle() {
-      google.accounts.id.prompt()
+    function generarNonce() {
+      const arr = new Uint8Array(16)
+      crypto.getRandomValues(arr)
+      return btoa(String.fromCharCode(...arr))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '')
     }
 
-    async function handleGoogleIdToken(idToken, nonce) {
-      try {
-        const { data, error } = await sb.auth.signInWithIdToken({
-          provider: 'google',
-          token: idToken,
-          nonce
-        })
-        if (error) throw error
-        window.location.href = 'https://gabrielcolazo.github.io/barago/publicar.html'
-      } catch (err) {
-        document.getElementById('auth-error').textContent = err.message
-        document.getElementById('auth-error').classList.remove('d-none')
+    let googleNonce = generarNonce()
+
+    google.accounts.id.initialize({
+      client_id: '973809022626-0k8o5hepl6v3o1pjunho87r1ki3107qd.apps.googleusercontent.com',
+      nonce: googleNonce,
+      callback: async (response) => {
+        if (response.error) {
+          document.getElementById('auth-error').textContent = 'Error al iniciar con Google'
+          document.getElementById('auth-error').classList.remove('d-none')
+          return
+        }
+        try {
+          const { error } = await sb.auth.signInWithIdToken({
+            provider: 'google',
+            token: response.credential,
+            nonce: googleNonce
+          })
+          if (error) throw error
+          window.location.href = 'https://gabrielcolazo.github.io/barago/publicar.html'
+        } catch (err) {
+          document.getElementById('auth-error').textContent = err.message
+          document.getElementById('auth-error').classList.remove('d-none')
+        }
       }
+    })
+
+    function handleGoogle() {
+      google.accounts.id.prompt()
     }
 
     async function handleMagicLink() {
@@ -185,8 +182,6 @@
     document.getElementById('password').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handleAuth()
     })
-
-    initGoogle()
   </script>
 
   <footer class="footer">

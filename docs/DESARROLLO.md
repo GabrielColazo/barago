@@ -121,10 +121,41 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - Google OAuth callback URL: `https://{project}.supabase.co/auth/v1/callback`
 - Redirect URLs en Supabase: `https://gabrielcolazo.github.io/barago/**`
 
+## Auth
+
+### Métodos disponibles (login.html)
+
+| Método | Función | Estado |
+|--------|---------|--------|
+| Email + contraseña | `iniciarSesion()` / `registrar()` | ✅ Funciona |
+| Google | Google One Tap (`google.accounts.id`) + `signInWithIdToken` | ✅ Funciona, muestra `gabrielcolazo.github.io` |
+| Magic Link | `enviarMagicLink()` → `signInWithOtp` | ⏳ Pendiente CNAME en DonWeb |
+
+### Google — implementación
+
+- Se usa **Google Identity Services** (GIS) con One Tap (`google.accounts.id`)
+- Se genera un nonce URL-safe y se pasa tanto a Google como a Supabase
+- El popup/consent screen muestra `gabrielcolazo.github.io` (JavaScript origin)
+- No necesita redirect URI porque el flujo es todo client-side (popup + token exchange directo)
+- `auth-callback.html` no se usa (esqueleto para futuro si se necesita PKCE)
+
+### Google Cloud Console — credenciales
+
+- **Client ID:** `YOUR_GOOGLE_CLIENT_ID`
+- **Client Secret:** `YOUR_GOOGLE_CLIENT_SECRET`
+- **Authorized JavaScript origins:** `https://gabrielcolazo.github.io`
+- **Authorized redirect URIs:** `https://mqyefceumiesjelorjbm.supabase.co/auth/v1/callback` (ya no se usa, pero Google la requiere)
+- CSP en `login.html` incluye `https://accounts.google.com` en default-src, script-src y connect-src
+
+## Diseño — cambios recientes
+
+- **Footer:** fondo `#F0FDF4`, borde superior con gradiente animado (verde → ámbar), fade-in al cargar, subrayado animado en link GaboWeb
+- **login.html:** botón "Ingresar con Google" con ícono G estilizado, separador "o", link "Enviar link mágico"
+- **auth.js:** funciones `iniciarSesionGoogle()` (fallback OAuth), `enviarMagicLink()`, constante `AUTH_REDIRECT`
+
 ## Issues conocidos
 
-- GitHub Pages falla con "Node.js 20 is deprecated" (error de GitHub, temporal)
-- Email de confirmación de Supabase con SendGrid SMTP funcionando (requiere CNAME en DonWeb para evitar spam/greylisting)
+- Email de confirmación con SendGrid: requiere CNAME en DonWeb para evitar greylisting/spam
 
 ## Pendientes
 
@@ -144,6 +175,7 @@ barago/
 ├── login.html                # Login/Registro con email
 ├── publicar.html             # Publicar anuncio (registro inline)
 ├── anuncio.html              # Detalle del anuncio con galería
+├── auth-callback.html         # Callback OAuth (reserva para PKCE)
 ├── schema.sql                # SQL completo de la DB
 ├── migracion_imagenes.sql    # Migración tabla anuncio_imagenes
 ├── migracion_telefono.sql    # Migración columna telefono
