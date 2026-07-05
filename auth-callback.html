@@ -44,7 +44,7 @@
     <div class="spinner"></div>
     <h2>Bienvenido a Barago</h2>
     <p>Te estamos redirigiendo...</p>
-    <p style="margin-top:1rem;font-size:0.8rem;">
+    <p id="fallback-link" style="margin-top:1rem;font-size:0.8rem;">
       Si no sos redirigido, <a href="/barago/publicar.html">hacé click acá</a>
     </p>
   </div>
@@ -67,6 +67,7 @@
       const errorDesc = params.get('error_description') || hashParams.get('error_description')
 
       if (error) {
+        document.getElementById('fallback-link').style.display = 'none'
         document.querySelector('.spinner').style.display = 'none'
         document.querySelector('h2').textContent = 'No pudimos iniciar sesión'
         document.querySelector('p').textContent = errorDesc ? decodeURIComponent(errorDesc) : 'Ocurrió un error inesperado.'
