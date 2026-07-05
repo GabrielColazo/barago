@@ -120,38 +120,34 @@
       const arr = new Uint8Array(16)
       crypto.getRandomValues(arr)
       return btoa(String.fromCharCode(...arr))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
         .replace(/=+$/, '')
     }
 
-    let googleNonce = generarNonce()
-
-    google.accounts.id.initialize({
-      client_id: '973809022626-0k8o5hepl6v3o1pjunho87r1ki3107qd.apps.googleusercontent.com',
-      nonce: googleNonce,
-      callback: async (response) => {
-        if (response.error) {
-          document.getElementById('auth-error').textContent = 'Error al iniciar con Google'
-          document.getElementById('auth-error').classList.remove('d-none')
-          return
-        }
-        try {
-          const { error } = await sb.auth.signInWithIdToken({
-            provider: 'google',
-            token: response.credential,
-            nonce: googleNonce
-          })
-          if (error) throw error
-          window.location.href = 'https://gabrielcolazo.github.io/barago/publicar.html'
-        } catch (err) {
-          document.getElementById('auth-error').textContent = err.message
-          document.getElementById('auth-error').classList.remove('d-none')
-        }
-      }
-    })
-
     function handleGoogle() {
+      const nonce = generarNonce()
+      google.accounts.id.initialize({
+        client_id: '973809022626-0k8o5hepl6v3o1pjunho87r1ki3107qd.apps.googleusercontent.com',
+        nonce,
+        callback: async (response) => {
+          if (response.error) {
+            document.getElementById('auth-error').textContent = 'Error al iniciar con Google'
+            document.getElementById('auth-error').classList.remove('d-none')
+            return
+          }
+          try {
+            const { error } = await sb.auth.signInWithIdToken({
+              provider: 'google',
+              token: response.credential,
+              nonce
+            })
+            if (error) throw error
+            window.location.href = 'https://gabrielcolazo.github.io/barago/publicar.html'
+          } catch (err) {
+            document.getElementById('auth-error').textContent = err.message
+            document.getElementById('auth-error').classList.remove('d-none')
+          }
+        }
+      })
       google.accounts.id.prompt()
     }
 
