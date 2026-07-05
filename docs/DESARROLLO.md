@@ -128,6 +128,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - Redirect URLs en Supabase: `https://gabrielcolazo.github.io/barago/**`
 - RLS: reemplazado `auth.role()` deprecado por `TO authenticated` + `WITH CHECK (usuario_id = auth.uid())` en políticas INSERT
 - Traducción de errores Supabase en `login.html`: "Invalid login credentials", "Email not confirmed", "User already registered" → mensajes claros en español
+- Skeleton loader: 6 cards animadas con pulse mientras cargan anuncios en index.html
 
 ## Auth
 
