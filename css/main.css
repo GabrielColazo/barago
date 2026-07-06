@@ -330,7 +330,7 @@ a:hover {
 
 .card-anuncio {
   background: #FFFFFF;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -344,7 +344,7 @@ a:hover {
 .card-anuncio .card-img-wrap {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/10;
   background: #E5E7EB;
 }
 .card-anuncio .card-img-wrap .card-img {
@@ -357,26 +357,26 @@ a:hover {
   transform: scale(1.05);
 }
 .card-anuncio .card-body {
-  padding: 0.875rem;
+  padding: 0.6rem 0.75rem 0.75rem;
 }
 .card-anuncio .card-body .card-categoria {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #059669;
   font-weight: 500;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
 }
 .card-anuncio .card-body .card-titulo {
   font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 .card-anuncio .card-body .card-precio {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 800;
   color: #047857;
   letter-spacing: -0.02em;
@@ -385,10 +385,10 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.4rem;
+  margin-top: 0.25rem;
 }
 .card-anuncio .card-body .card-meta .card-fecha {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #6B7280;
 }
 
@@ -594,48 +594,49 @@ a:hover {
 }
 
 .anuncio-detalle {
-  max-width: 800px;
-  margin: 1.5rem auto;
+  max-width: 720px;
+  margin: 1rem auto;
   padding: 0 1rem;
 }
 .anuncio-detalle .anuncio-imagen {
   width: 100%;
-  max-height: 280px;
+  max-height: 240px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #E5E7EB;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 @media (min-width: 576px) {
   .anuncio-detalle .anuncio-imagen {
-    max-height: 450px;
+    max-height: 360px;
+    border-radius: 12px;
   }
 }
 .anuncio-detalle .anuncio-header {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 @media (min-width: 576px) {
   .anuncio-detalle .anuncio-header {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 }
 .anuncio-detalle .anuncio-header h1 {
-  font-weight: 800;
-  font-size: 1.15rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   letter-spacing: -0.02em;
 }
 @media (min-width: 576px) {
   .anuncio-detalle .anuncio-header h1 {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
   }
 }
 .anuncio-detalle .anuncio-header .anuncio-precio {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #047857;
   white-space: nowrap;
@@ -643,15 +644,15 @@ a:hover {
 }
 @media (min-width: 576px) {
   .anuncio-detalle .anuncio-header .anuncio-precio {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 }
 .anuncio-detalle .anuncio-meta {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin: 0.75rem 0;
-  padding: 0.75rem 0;
+  margin: 0.6rem 0;
+  padding: 0.6rem 0;
   border-top: 1px solid #E5E7EB;
   border-bottom: 1px solid #E5E7EB;
 }
@@ -659,12 +660,12 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #6B7280;
 }
 .anuncio-detalle .anuncio-descripcion {
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 0.925rem;
+  line-height: 1.65;
   color: #111827;
   white-space: pre-wrap;
 }

@@ -101,7 +101,7 @@
 
 .card-anuncio {
   background: v.$surface;
-  border-radius: v.$radius;
+  border-radius: v.$radius-sm;
   overflow: hidden;
   box-shadow: v.$shadow;
   transition: transform v.$transition, box-shadow v.$transition;
@@ -116,7 +116,7 @@
   .card-img-wrap {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/10;
     background: v.$border;
 
     .card-img {
@@ -132,28 +132,28 @@
   }
 
   .card-body {
-    padding: 0.875rem;
+    padding: 0.6rem 0.75rem 0.75rem;
 
     .card-categoria {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: v.$primary;
       font-weight: 500;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
 
     .card-titulo {
       font-weight: 600;
-      font-size: v.$font-size-base;
-      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .card-precio {
-      font-size: 1.15rem;
+      font-size: 1rem;
       font-weight: 800;
       color: v.$primary-dark;
       letter-spacing: -0.02em;
@@ -163,10 +163,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 0.4rem;
+      margin-top: 0.25rem;
 
       .card-fecha {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: v.$text-secondary;
       }
     }
