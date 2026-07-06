@@ -176,6 +176,15 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **Footer:** fondo `#F0FDF4`, borde superior con gradiente animado (verde → ámbar), fade-in al cargar, subrayado animado en link GaboWeb
 - **login.html:** botón "Ingresar con Google" con ícono G estilizado, separador "o", link "Enviar link mágico"
 - **auth.js:** funciones `iniciarSesionGoogle()` (fallback OAuth), `enviarMagicLink()`, constante `AUTH_REDIRECT`
+- **Responsive design (mobile-first):** jul 2026
+  - Logo responsive: 64px mobile / 80px tablet / 120px desktop
+  - Hero: padding y títulos escalan con `min-width` (576px y 992px)
+  - Grid de anuncios: `minmax(160px, 1fr)` mobile → `220px` tablet → `270px` desktop
+  - Detalle anuncio: header en columna en mobile, fila en tablet+
+  - Imagen de detalle: `max-height: 280px` mobile, `450px` desktop
+  - Gallery thumbs: 56px mobile / 64px tablet / 72px desktop
+  - Auth card: padding 1.5rem mobile / 2.25rem desktop
+  - Footer: padding y margin-top reducidos en mobile
 
 ## Issues conocidos
 

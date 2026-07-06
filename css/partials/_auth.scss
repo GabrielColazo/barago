@@ -11,10 +11,14 @@
 .auth-card {
   background: v.$surface;
   border-radius: 16px;
-  padding: 2.25rem;
+  padding: 1.5rem;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+
+  @media (min-width: 576px) {
+    padding: 2.25rem;
+  }
 
   h2 {
     font-weight: 800;

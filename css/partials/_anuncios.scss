@@ -7,32 +7,49 @@
 
   .anuncio-imagen {
     width: 100%;
-    max-height: 450px;
+    max-height: 280px;
     object-fit: cover;
     border-radius: v.$radius;
     background: v.$border;
     margin-bottom: 1.25rem;
+
+    @media (min-width: 576px) {
+      max-height: 450px;
+    }
   }
 
   .anuncio-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @media (min-width: 576px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
 
     h1 {
       font-weight: 800;
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       letter-spacing: -0.02em;
+
+      @media (min-width: 576px) {
+        font-size: 1.35rem;
+      }
     }
 
     .anuncio-precio {
-      font-size: 1.75rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: v.$primary-dark;
       white-space: nowrap;
       letter-spacing: -0.02em;
+
+      @media (min-width: 576px) {
+        font-size: 1.75rem;
+      }
     }
   }
 
@@ -63,14 +80,24 @@
 }
 
 .gallery-thumb {
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
   opacity: 0.5;
   transition: all v.$transition;
   border: 2px solid transparent;
+
+  @media (min-width: 576px) {
+    width: 64px;
+    height: 64px;
+  }
+
+  @media (min-width: 992px) {
+    width: 72px;
+    height: 72px;
+  }
 
   &:hover,
   &.active {
@@ -81,45 +108,67 @@
 
 .gallery-badge {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 6px;
+  right: 6px;
   background: rgba(0,0,0,0.55);
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 8px;
+  padding: 2px 6px;
+  border-radius: 6px;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+
+  @media (min-width: 576px) {
+    top: 8px;
+    right: 8px;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
 }
 
 .publicar-page {
   max-width: 520px;
-  margin: 1.5rem auto;
+  margin: 1rem auto;
   padding: 0 1rem;
 
   h1 {
     font-weight: 800;
-    font-size: 1.35rem;
-    margin-bottom: 1.25rem;
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    @media (min-width: 576px) {
+      font-size: 1.35rem;
+      margin-bottom: 1.25rem;
+    }
   }
 
   .input-lg {
-    font-size: 1.1rem;
-    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    padding: 0.75rem 0.9rem;
+
+    @media (min-width: 576px) {
+      font-size: 1.1rem;
+      padding: 0.85rem 1rem;
+    }
   }
 
   .drop-zone {
     border: 2px dashed v.$border;
     border-radius: v.$radius;
-    padding: 1.25rem;
+    padding: 1rem;
     text-align: center;
     cursor: pointer;
     transition: all v.$transition;
     background: v.$bg;
+
+    @media (min-width: 576px) {
+      padding: 1.25rem;
+    }
 
     &:hover,
     &.dragover {
@@ -128,8 +177,12 @@
     }
 
     .drop-icon {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       margin-bottom: 0.2rem;
+
+      @media (min-width: 576px) {
+        font-size: 1.75rem;
+      }
     }
 
     p {
@@ -142,9 +195,21 @@
 
 .grid-anuncios {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 1.25rem;
-  padding: 1.5rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  padding: 1rem 0;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 1.25rem 0;
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+  }
 }
 
 .card-skeleton {
