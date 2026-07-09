@@ -98,7 +98,21 @@ async function guardarImagenesAnuncio(anuncioId, urls) {
   if (error) throw error
 }
 
+function eliminarArchivosStorage(urls) {
+  const filenames = urls.map(url => {
+    const partes = url.split('/')
+    return partes[partes.length - 1]
+  })
+  if (filenames.length === 0) return
+  sb.storage.from('imagenes').remove(filenames)
+    .catch(err => console.error('Error al limpiar storage:', err))
+}
+
 async function eliminarAnuncio(id) {
+  const imagenes = await obtenerImagenesAnuncio(id)
+  if (imagenes.length > 0) {
+    eliminarArchivosStorage(imagenes.map(i => i.url))
+  }
   const { error } = await sb.from('anuncios').delete().eq('id', id)
   if (error) throw error
 }
@@ -129,6 +143,10 @@ async function actualizarAnuncio(id, data) {
 }
 
 async function eliminarImagenesAnuncio(anuncioId) {
+  const imagenes = await obtenerImagenesAnuncio(anuncioId)
+  if (imagenes.length > 0) {
+    eliminarArchivosStorage(imagenes.map(i => i.url))
+  }
   const { error } = await sb.from('anuncio_imagenes').delete().eq('anuncio_id', anuncioId)
   if (error) throw error
 }
