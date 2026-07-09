@@ -41,11 +41,11 @@
       <input type="hidden" id="anuncio-id" value="">
 
       <div class="form-group">
-        <label>Foto (opcional)</label>
+        <label>Foto (opcional, máximo 2)</label>
         <div class="drop-zone" onclick="document.getElementById('file-input').click()">
           <div class="drop-icon" id="drop-icon">📷</div>
           <p id="drop-text">Tocá para agregar una foto</p>
-          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" class="d-none" onchange="manejarArchivos(event)">
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" class="d-none" onchange="manejarArchivos(event)" multiple>
         </div>
         <div id="previews" class="d-flex gap-2 mt-2 flex-wrap"></div>
       </div>
@@ -169,16 +169,7 @@
         }
 
         editandoImagenesExistentes = a.imagenes || []
-        if (editandoImagenesExistentes.length > 0) {
-          const container = document.getElementById('previews')
-          container.innerHTML = editandoImagenesExistentes.map((img, i) => `
-            <div style="position:relative;width:100px;height:100px;">
-              <img src="${img.url}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
-            </div>
-          `).join('')
-          document.getElementById('drop-icon').textContent = '✅'
-          document.getElementById('drop-text').textContent = `${editandoImagenesExistentes.length} foto(s) existente(s)`
-        }
+        renderPreviews()
       } catch (err) {
         alert('Error al cargar el anuncio: ' + err.message)
         window.location.href = 'mis-avisos.html'
@@ -191,30 +182,115 @@
       document.getElementById('categoria').value = id
     }
 
-    function manejarArchivos(e) {
-      const file = e.target.files[0]
-      if (!file) return
+    function comprimirImagen(file) {
+      return new Promise((resolve, reject) => {
+        if (file.size <= 1 * 1024 * 1024) {
+          resolve(file)
+          return
+        }
 
-      if (file.size > 5 * 1024 * 1024) {
-        alert('La imagen pesa más de 5MB. Elegí otra.')
-        return
-      }
-      const ext = file.name.split('.').pop().toLowerCase()
-      if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) {
-        alert('Solo JPG, PNG o WEBP')
-        return
-      }
+        const img = new Image()
+        img.onload = () => {
+          URL.revokeObjectURL(img.src)
+          const canvas = document.createElement('canvas')
+          let { width, height } = img
+          if (width > 1600) {
+            height = Math.round(height * 1600 / width)
+            width = 1600
+          }
+          canvas.width = width
+          canvas.height = height
+          const ctx = canvas.getContext('2d')
+          ctx.drawImage(img, 0, 0, width, height)
+          canvas.toBlob((blob) => {
+            if (blob.size > 5 * 1024 * 1024) {
+              reject(new Error('TOO_LARGE'))
+              return
+            }
+            const nombre = file.name.replace(/\.[^.]+$/, '') + '.jpg'
+            resolve(new File([blob], nombre, { type: 'image/jpeg' }))
+          }, 'image/jpeg', 0.8)
+        }
+        img.onerror = () => {
+          URL.revokeObjectURL(img.src)
+          reject(new Error('Error al cargar la imagen'))
+        }
+        img.src = URL.createObjectURL(file)
+      })
+    }
 
-      archivosSeleccionados = [file]
+    function renderPreviews() {
       const container = document.getElementById('previews')
-      container.innerHTML = `
-        <div style="position:relative;width:120px;height:120px;">
+      let html = ''
+
+      if (editandoId) {
+        editandoImagenesExistentes.forEach((img) => {
+          html += `<div style="position:relative;width:100px;height:100px;">
+            <img src="${img.url}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+          </div>`
+        })
+      }
+
+      archivosSeleccionados.forEach((file, i) => {
+        html += `<div style="position:relative;width:120px;height:120px;">
           <img src="${URL.createObjectURL(file)}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
-          <button type="button" onclick="archivosSeleccionados=[];document.getElementById('previews').innerHTML='';document.getElementById('drop-icon').textContent='📷';document.getElementById('drop-text').textContent='Tocá para agregar una foto'" style="position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;border:none;background:#EF4444;color:white;font-size:14px;cursor:pointer;">×</button>
-        </div>
-      `
-      document.getElementById('drop-icon').textContent = '✅'
-      document.getElementById('drop-text').textContent = '1 foto seleccionada'
+          <button type="button" onclick="removerImagen(${i})" style="position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;border:none;background:#EF4444;color:white;font-size:14px;cursor:pointer;">×</button>
+        </div>`
+      })
+
+      container.innerHTML = html
+
+      const total = (editandoId ? editandoImagenesExistentes.length : 0) + archivosSeleccionados.length
+      document.getElementById('drop-icon').textContent = total > 0 ? '✅' : '📷'
+      document.getElementById('drop-text').textContent = total > 0
+        ? `${total} foto(s) seleccionada(s)`
+        : 'Tocá para agregar una foto'
+    }
+
+    function removerImagen(index) {
+      archivosSeleccionados.splice(index, 1)
+      renderPreviews()
+    }
+
+    async function manejarArchivos(e) {
+      const files = Array.from(e.target.files)
+      if (!files.length) return
+
+      const existentes = editandoId ? editandoImagenesExistentes.length : 0
+      const disponibles = MAX_IMAGENES - existentes - archivosSeleccionados.length
+
+      if (disponibles <= 0) {
+        alert(`Ya alcanzaste el máximo de ${MAX_IMAGENES} foto(s).`)
+        e.target.value = ''
+        return
+      }
+
+      for (const file of files) {
+        if (archivosSeleccionados.length >= disponibles) {
+          alert(`Máximo ${MAX_IMAGENES} foto(s).`)
+          break
+        }
+
+        const ext = file.name.split('.').pop().toLowerCase()
+        if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) {
+          alert(`"${file.name}" no es un formato válido. Usá JPG, PNG o WEBP`)
+          continue
+        }
+
+        try {
+          const comprimido = await comprimirImagen(file)
+          archivosSeleccionados.push(comprimido)
+        } catch (err) {
+          if (err.message === 'TOO_LARGE') {
+            alert(`"${file.name}" sigue pesando demasiado incluso después de comprimirla. Probá recortarla, bajarle la resolución desde tu celular/PC, o elegí otra foto.`)
+          } else {
+            alert(err.message)
+          }
+          continue
+        }
+      }
+
+      renderPreviews()
       e.target.value = ''
     }
 

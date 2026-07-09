@@ -1,4 +1,4 @@
-const MAX_IMAGENES = 3
+const MAX_IMAGENES = 2
 const MAX_PESO_MB = 5
 
 async function obtenerAnuncios(filtro = {}) {
