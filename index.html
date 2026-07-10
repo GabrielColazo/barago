@@ -87,6 +87,7 @@
       const select = document.getElementById('categoria-select')
 
       container.innerHTML = '<span class="badge-categoria active" data-id="">Todas</span>'
+      container.querySelector('.badge-categoria[data-id=""]').onclick = function() { filtrarPorCategoria(null, this) }
       select.innerHTML = '<option value="">Todas las categorías</option>'
 
       categorias.forEach(cat => {
