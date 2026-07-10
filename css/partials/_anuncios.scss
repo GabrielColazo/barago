@@ -349,6 +349,13 @@
   }
 }
 
+.card-acciones-mis-avisos {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.5rem 0.65rem 0.65rem;
+  border-top: 1px solid v.$border;
+}
+
 @media (max-width: 575px) {
   .mis-aviso-card {
     flex-wrap: wrap;

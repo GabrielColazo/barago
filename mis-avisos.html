@@ -42,7 +42,7 @@
       <p class="text-secondary mt-2">Cargando tus avisos...</p>
     </div>
 
-    <div id="mis-avisos-container"></div>
+    <div class="grid-anuncios" id="mis-avisos-container"></div>
   </main>
 
   <footer class="footer">
@@ -74,7 +74,7 @@
 
         if (anuncios.length === 0) {
           container.innerHTML = `
-            <div class="empty-state">
+            <div class="empty-state" style="grid-column:1/-1">
               <div class="empty-icon">📭</div>
               <h3>Todavía no publicaste nada</h3>
               <p>Creá tu primer anuncio gratis</p>
@@ -86,21 +86,25 @@
 
         container.innerHTML = anuncios.map(a => {
           const imgUrl = a.imagenes?.[0]?.url || 'assets/img/no-image.svg'
+          const icono = escapeHtml(a.categorias?.icono || '📦')
+          const nombreCategoria = escapeHtml(a.categorias?.nombre || '')
           const fecha = new Date(a.created_at).toLocaleDateString('es-AR')
           return `
-          <div class="mis-aviso-card">
-            <div class="mis-aviso-img">
-              <img src="${imgUrl}" alt="${escapeHtml(a.titulo)}" loading="lazy">
+          <div class="card-anuncio">
+            <div class="card-img-wrap">
+              <img class="card-img" src="${imgUrl}" alt="${escapeHtml(a.titulo)}" loading="lazy">
+              <span class="card-categoria-pill">${icono} ${nombreCategoria}</span>
             </div>
-            <div class="mis-aviso-body">
-              <div class="mis-aviso-categoria">${escapeHtml(a.categorias?.icono || '📦')} ${escapeHtml(a.categorias?.nombre || 'Sin categoría')}</div>
-              <div class="mis-aviso-titulo">${escapeHtml(a.titulo)}</div>
-              <div class="mis-aviso-precio">$${Number(a.precio).toLocaleString('es-AR')}</div>
-              <div class="mis-aviso-fecha">${fecha}</div>
+            <div class="card-body">
+              <div class="card-titulo">${escapeHtml(a.titulo)}</div>
+              <div class="card-precio">$${Number(a.precio).toLocaleString('es-AR')}</div>
+              <div class="card-meta">
+                <span class="card-fecha">${fecha}</span>
+              </div>
             </div>
-            <div class="mis-aviso-acciones">
-              <a href="publicar.html?editar=${a.id}" class="btn-sm-edit">✏️ Editar</a>
-              <button onclick="eliminarAviso('${a.id}')" class="btn-sm-delete">🗑 Eliminar</button>
+            <div class="card-acciones-mis-avisos">
+              <a href="publicar.html?editar=${a.id}" class="btn-sm-edit" onclick="event.stopPropagation()">✏️ Editar</a>
+              <button onclick="event.stopPropagation(); eliminarAviso('${a.id}')" class="btn-sm-delete">🗑 Eliminar</button>
             </div>
           </div>`
         }).join('')
