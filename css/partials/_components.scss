@@ -109,14 +109,14 @@
   position: relative;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   }
 
   .card-img-wrap {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 16/10;
+    aspect-ratio: 1/1;
     background: v.$border;
 
     .card-img {
@@ -125,6 +125,21 @@
       object-fit: cover;
       transition: transform v.$transition-slow;
     }
+
+    .card-categoria-pill {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(255,255,255,0.92);
+      color: v.$primary-dark;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 50px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      line-height: 1.3;
+    }
   }
 
   &:hover .card-img {
@@ -132,41 +147,40 @@
   }
 
   .card-body {
-    padding: 0.6rem 0.75rem 0.75rem;
-
-    .card-categoria {
-      font-size: 0.7rem;
-      color: v.$primary;
-      font-weight: 500;
-      margin-bottom: 0.15rem;
-    }
+    padding: 0.5rem 0.65rem 0.65rem;
 
     .card-titulo {
       font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 0.2rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.15rem;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      line-height: 1.35;
+      line-height: 1.3;
     }
 
     .card-precio {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 800;
-      color: v.$primary-dark;
+      color: v.$text;
       letter-spacing: -0.02em;
+      margin-bottom: 0.1rem;
     }
 
     .card-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 0.25rem;
+
+      .card-categoria {
+        font-size: 0.65rem;
+        color: v.$primary;
+        font-weight: 500;
+      }
 
       .card-fecha {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         color: v.$text-secondary;
       }
     }
@@ -215,11 +229,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.35rem 0.7rem;
-  background: v.$primary-light;
-  color: v.$primary-dark;
+  padding: 0.3rem 0.65rem;
+  background: v.$surface;
+  color: v.$text;
+  border: 1px solid v.$border;
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: all v.$transition;
   cursor: pointer;
@@ -228,12 +243,33 @@
   &.active {
     background: v.$primary;
     color: white;
+    border-color: v.$primary;
     box-shadow: 0 1px 4px rgba(v.$primary, 0.25);
   }
 
   &:hover {
-    background: v.$primary;
-    color: white;
+    background: v.$primary-light;
+    border-color: v.$primary;
+  }
+}
+
+.categorias-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.75rem 0 0.5rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .badge-categoria {
+    scroll-snap-align: start;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
 

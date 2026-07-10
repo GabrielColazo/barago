@@ -1,12 +1,12 @@
 @use 'variables' as v;
 
 .header {
-  background: rgba(248, 253, 250, 0.95);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 2px solid rgba(5, 150, 105, 0.12);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  padding: 0.75rem 0;
+  border-bottom: 1px solid v.$border;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 0.5rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -24,35 +24,61 @@
     text-decoration: none;
 
     img.logo-icon {
-      height: 40px;
+      height: 36px;
       width: auto;
       display: block;
 
       @media (min-width: 576px) {
-        height: 48px;
+        height: 42px;
       }
 
       @media (min-width: 992px) {
-        height: 56px;
+        height: 48px;
       }
     }
   }
 
-  @media (min-width: 576px) {
-    padding: 1rem 0;
+  .btn-publicar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: v.$primary;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.85rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all v.$transition;
+    text-decoration: none;
+    white-space: nowrap;
 
-    .header-inner {
-      gap: 1rem;
+    &:hover {
+      background: v.$primary-dark;
+      color: white;
     }
   }
+
+  #user-dropdown {
+    animation: fadeDown 0.15s ease both;
+  }
+
+  @media (min-width: 576px) {
+    padding: 0.65rem 0;
+  }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 1.5rem 1rem 1.75rem;
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 50%, #FAFAFA 100%);
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, v.$primary-light 0%, v.$bg 60%);
 
   > * {
     position: relative;
@@ -60,58 +86,71 @@
   }
 
   h1 {
-    font-size: 1.75rem;
-    font-weight: 900;
-    margin-bottom: 0.25rem;
-    background: linear-gradient(135deg, #047857 0%, #065F46 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.04em;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: v.$primary-dark;
+    margin-bottom: 0.15rem;
+    letter-spacing: -0.03em;
 
     @media (min-width: 576px) {
-      font-size: 2.2rem;
-    }
-
-    @media (min-width: 992px) {
-      font-size: 2.5rem;
+      font-size: 1.35rem;
     }
   }
 
   .hero-shop {
     color: #059669;
-    -webkit-text-fill-color: #059669;
-    background: none;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: v.$text;
+    font-size: 0.8rem;
+    color: v.$text-secondary;
     margin-bottom: 0.75rem;
 
     @media (min-width: 576px) {
-      font-size: 1.05rem;
+      font-size: 0.85rem;
     }
   }
 
-  .hero-desc {
-    font-size: 0.9rem;
-    color: v.$text-secondary;
-    max-width: 420px;
-    margin: 0 auto 1.25rem;
+  .hero-search {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto;
 
-    @media (min-width: 576px) {
+    .hero-search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
       font-size: 1rem;
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      color: v.$text;
+      font-family: v.$font-family;
+      transition: box-shadow v.$transition;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 4px 16px rgba(5, 150, 105, 0.2);
+      }
+
+      &::placeholder {
+        color: #9CA3AF;
+      }
     }
   }
 
   @media (min-width: 576px) {
-    padding: 4rem 1rem;
-  }
-
-  @media (min-width: 992px) {
-    padding: 5rem 1rem;
+    padding: 2rem 1rem;
   }
 }
 
@@ -127,29 +166,17 @@
 }
 
 .footer {
-  background: #F0FDF4;
+  background: #065F46;
   position: relative;
-  padding: 2rem 0 1.5rem;
+  padding: 1.5rem 0 1.25rem;
   text-align: center;
-  color: #374151;
+  color: rgba(255,255,255,0.8);
   font-size: v.$font-size-sm;
   margin-top: 2.5rem;
 
   @media (min-width: 576px) {
-    padding: 2.5rem 0 2rem;
+    padding: 2rem 0 1.5rem;
     margin-top: 4rem;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #059669, #34D399, #059669, #F59E0B, #059669);
-    background-size: 300% 100%;
-    animation: borderGlow 6s ease infinite;
   }
 
   > .container {
@@ -158,40 +185,24 @@
 
   .footer-brand {
     font-weight: 700;
-    font-size: 1.05rem;
-    color: #065F46;
+    font-size: 1rem;
+    color: white;
     margin-bottom: 0.25rem;
   }
 
   .footer-copy {
     margin: 0.1rem 0;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 
   a {
-    color: v.$primary;
+    color: #6EE7B7;
     text-decoration: none;
-    position: relative;
     transition: color 0.2s;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transition: transform 0.25s ease;
-    }
-
     &:hover {
-      color: #047857;
-
-      &::after {
-        transform: scaleX(1);
-      }
+      color: white;
+      text-decoration: underline;
     }
   }
 }
