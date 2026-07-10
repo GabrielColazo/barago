@@ -9,8 +9,8 @@ Se optimizaron múltiples aspectos del Hero para crear una presentación más at
 
 ### 1. Mejora de la Estructura del Hero
 - **Efecto 3D:** Se añadió perspectiva `perspective: 1000px` y transformaciones `translateZ(0)` para profundidad visual
-- **Textura de corcho:** Se simplificó y modernizó el fondo - los gradientes ricos y complejos de corcho han sido reemplazados por un fondo más limpio y profesional con degradado sutil (#FEFEFE → #F7F5F2 → #F9F8F6) y textura reducida
-- **Animación avanzada:** Se reemplazó `boardFloat` con `subtleFloat` - animación más sutil y refinada con solo movimiento vertical, aumentando la elegancia visual
+- **Fondo Moderno:** Se eliminó completamente el patrón de textura tipo corcho y se reemplazó con un degradado de CSS limpio y profesional (#FEFEFE → #F7F5F2 → #F9F8F6)
+- **Simplificación de Animaciones:** Se eliminaron las animaciones de fondo complejas, resultando en rendimiento mejorado y una página centrada
 
 ### 2. Mejora del Panel Central (hero-board)
 - **Aumento de padding:** Ajustado de `2.5rem 1.5rem 3rem` a `3rem 2rem 3.5rem` para más espacio
