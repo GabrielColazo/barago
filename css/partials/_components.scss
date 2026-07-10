@@ -254,6 +254,7 @@
 }
 
 .categorias-scroll {
+  position: relative;
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
@@ -264,6 +265,18 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 40px;
+    background: linear-gradient(to right, transparent, v.$bg);
+    pointer-events: none;
+    z-index: 2;
   }
 
   .badge-categoria {

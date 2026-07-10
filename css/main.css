@@ -134,49 +134,18 @@ a:hover {
   background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 50%, #FAFAFA 100%);
   position: relative;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(135deg, rgba(209, 250, 229, 0.85), rgba(167, 243, 208, 0.8), rgba(250, 250, 250, 0.75)),
-    url('../assets/img/imagenbaradero.webp');
-  background-size: cover, cover;
-  background-position: center, center;
-}
-@media (max-width: 575px) {
-  .hero::before {
-    background-position: center 30%, center;
-  }
-}
 .hero > * {
   position: relative;
   z-index: 1;
 }
-.hero h1 {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #047857;
-  margin-bottom: 0.15rem;
-  letter-spacing: -0.03em;
-}
-@media (min-width: 576px) {
-  .hero h1 {
-    font-size: 1.35rem;
-  }
-}
-.hero .hero-shop {
-  color: #059669;
-}
 .hero .hero-subtitle {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: #6B7280;
   margin-bottom: 0.75rem;
 }
 @media (min-width: 576px) {
   .hero .hero-subtitle {
-    font-size: 0.85rem;
+    font-size: 1.05rem;
   }
 }
 .hero .hero-search {
@@ -499,6 +468,7 @@ a:hover {
 
 /* ===== CATEGORIAS SCROLL ===== */
 .categorias-scroll {
+  position: relative;
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
@@ -509,6 +479,17 @@ a:hover {
 }
 .categorias-scroll::-webkit-scrollbar {
   display: none;
+}
+.categorias-scroll::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  background: linear-gradient(to right, transparent, #FAFAFA);
+  pointer-events: none;
+  z-index: 2;
 }
 .categorias-scroll .badge-categoria {
   scroll-snap-align: start;
