@@ -100,9 +100,14 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 ## Diseño
 
 - Logo: imagen `barashop.webp` en header
-- Hero: gradiente verde clarito (#D1FAE5 → #FAFAFA), título "BaraShop" con "Shop" en verde #059669
-- Header: fondo verde clarísimo (#F8FDFA), borde inferior verde tenue
-- Footer: fondo verde clarito (#F0FDF4), barra animada degradé en el borde superior (verde + ámbar), link a GaboWeb
+- Header: fondo blanco semitransparente (rgba 255,255,255,0.97), backdrop-filter blur, borde inferior gris suave, shadow sutil. Botón "Publicar" con clase `.btn-publicar` (verde, compacto, SVG plus). Dropdown de usuario animado (fadeDown).
+- Hero: compacto (padding 1.5rem), fondo gradiente verde (#D1FAE5 → #A7F3D0 → #FAFAFA), título chico 1.15rem, barra de búsqueda redonda con lupa SVG integrada (`.hero-search`). Foto de fondo `imagenbaradero.webp` vía pseudo-elemento `::before` con overlay gradiente semitransparente (opacidad 0.75–0.85), fallback al gradiente si no carga la imagen. Mobile: background-position center 30%.
+- Categorías: chips horizontales con scroll-snap (`.categorias-scroll`), outline white, active verde sólido. Sin scrollbar visible.
+- Cards (`.card-anuncio`): 1:1 aspect ratio, imagen cover, pill de categoría overlay semi-transparente, precio dominante 1.1rem en #111827, meta compacta. Hover: translateY(-3px) + shadow.
+- Grid (`.grid-anuncios`): minmax(150px, 1fr) mobile → 180px tablet → 180–210px desktop, gaps justos.
+- Skeleton (`.card-skeleton`): 1:1 ratio, pulse animation.
+- Mis avisos: misma card-anuncio/grid-anuncios que index, con barra de acciones extra abajo (`.card-acciones-mis-avisos`).
+- Footer: fondo verde oscuro (#065F46), texto blanco semitransparente, enlaces en #6EE7B7.
 - Tipografía: Inter (Google Fonts)
 - Colores principales: #059669 (verde), #F59E0B (acento)
 
@@ -213,6 +218,17 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
   - Workflow diario 11:00 UTC (08:00 ARG) + disparo manual
   - Borra anuncios con created_at < 7 días + sus imágenes del storage
 - **Grid desktop limitada a 240px por tarjeta:** `minmax(200px, 240px)` en desktop para que no se estiren las tarjetas
+- **Rediseño tipo clasificados (jul 2026):** estilo visual tipo OLX/MercadoLibre
+  - Header compacto (0.5rem padding), clase `.btn-publicar` reusable con SVG plus
+  - Hero minimal con buscador integrado (`.hero-search`), padding reducido
+  - Categorías como chips horizontales con scroll-snap (`.categorias-scroll`), outline white
+  - Cards 1:1 con pill de categoría overlay (`.card-categoria-pill`), precio dominante 1.1rem en #111827
+  - Skeleton 1:1, grid 150px min mobile
+  - Footer oscuro #065F46 con texto blanco
+  - Dropdown de usuario animado (fadeDown)
+- **Foto de Baradero de fondo en hero (jul 2026):** `imagenbaradero.webp` vía `.hero::before` con overlay gradiente semitransparente 0.75–0.85 opacidad. Fallback al gradiente si no carga. Mobile: background-position center 30%.
+- **Unificación mis-avisos.html (jul 2026):** reemplazado `mis-aviso-card` por el mismo componente `card-anuncio`/`grid-anuncios` que index.html. Barra de acciones extra (`.card-acciones-mis-avisos`) con botones Editar/Eliminar. Eliminadas reglas CSS viejas `.mis-aviso-card`.
+- **Fix (jul 2026):** badge "Todas" en categorías no tenía onclick asignado — corregido.
 
 ## Pendientes
 
@@ -221,6 +237,13 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - [ ] SITE_URL y Redirect URLs en Supabase Auth ya configurados para GitHub Pages
 - [ ] (Opcional) Login con Google
 - [ ] (Opcional) Hostear en DonWeb
+
+## Estado actual (jul 2026)
+
+- Último commit: `48b0bbc` — restaurar imagenbaradero.webp + fix categoría Todas
+- 3 commits ahead del último doc: rediseño clasificados, foto hero, fix categorías, unificación mis-avisos
+- Repo: `https://github.com/GabrielColazo/barashop`
+- URL: `https://gabrielcolazo.github.io/barashop/`
 
 ## Estructura de archivos
 
@@ -251,7 +274,8 @@ barashop/
 │   └── anuncios.js           # CRUD anuncios + imágenes
 ├── assets/
 │   └── img/
-│       ├── barashop.webp        # Logo
+│       ├── barashop.webp             # Logo
+│       ├── imagenbaradero.webp       # Fondo del hero
 │       └── no-image.svg
 ├── .gitignore
 ├── mis-avisos.html            # Listado de mis anuncios (editar/eliminar)
@@ -263,5 +287,5 @@ barashop/
 │       ├── index.js           # Script de limpieza (Node.js)
 │       └── package.json
 └── docs/
-    └── README.md             # (este archivo)
+    └── DESARROLLO.md         # (este archivo)
 ```
