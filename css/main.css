@@ -207,14 +207,15 @@ a:hover {
 
 .sello-artesanal {
   display: inline-block;
-  border: 2px dashed #059669;
+  border: 2px dashed #FFFFFF;
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   padding: 0.35rem 0.9rem;
   transform: rotate(-4deg);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: #059669;
+  color: #FFFFFF;
+  opacity: 0.9;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
