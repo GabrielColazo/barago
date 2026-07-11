@@ -459,7 +459,7 @@ a:hover {
   border-radius: 50%;
 }
 .card-anuncio .card-body {
-  padding: 1rem 0.65rem 0.65rem;
+  padding: 0.5rem 0.65rem 0.65rem;
   background: #FFFFFF;
   border-radius: 0 0 8px 8px;
 }
