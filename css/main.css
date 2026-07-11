@@ -539,6 +539,19 @@ a:hover {
   cursor: pointer;
   user-select: none;
 }
+.card-img-wrap .badge-categoria {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(2px);
+  font-size: 0.65rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 20px;
+  border: none;
+  z-index: 2;
+  white-space: nowrap;
+}
 .badge-categoria.active {
   background: #059669;
   color: white;
