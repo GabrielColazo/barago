@@ -71,7 +71,7 @@
 
       <div class="form-group">
         <label for="telefono">Teléfono de contacto *</label>
-        <input type="tel" id="telefono" class="input-custom" placeholder="Ej: 11 5555-5555" maxlength="30" required>
+        <input type="tel" id="telefono" name="telefono" class="input-custom" placeholder="Ej: 11 5555-5555" maxlength="30" autocomplete="tel" inputmode="tel" pattern="[0-9+\-\s()]{6,30}" required>
       </div>
 
       <div class="form-group">
@@ -363,6 +363,13 @@
       if (!titulo || !precio || !telefono) {
         errorEl.style.color = '#EF4444'
         errorEl.textContent = !telefono ? 'Completá tu teléfono de contacto' : 'Completá el título y el precio'
+        errorEl.classList.remove('d-none')
+        return
+      }
+
+      if (telefono.includes('@')) {
+        errorEl.style.color = '#EF4444'
+        errorEl.textContent = 'El campo teléfono no puede contener un email, revisalo'
         errorEl.classList.remove('d-none')
         return
       }
