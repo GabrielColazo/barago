@@ -28,16 +28,18 @@
 
   <div class="publicar-page">
     <h1 id="pub-heading">📸 Publicá tu anuncio</h1>
+    <p class="pub-subtitle">Gratis, sin comisión, directo a tu vecino.</p>
 
-    <div id="alerta-registro" class="d-none" style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:0.75rem;">
-      <span style="font-size:1.5rem;">⚠️</span>
-      <div>
-        <strong style="display:block;margin-bottom:0.25rem;">No estás registrado</strong>
-        <span style="font-size:0.9rem;color:#92400E;">No te preocupes. Completá el formulario y al final creás tu cuenta con email y contraseña de forma rápida.</span>
+    <div class="hoja-publicar">
+      <div id="alerta-registro" class="d-none" style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:0.75rem;">
+        <span style="font-size:1.5rem;">⚠️</span>
+        <div>
+          <strong style="display:block;margin-bottom:0.25rem;">No estás registrado</strong>
+          <span style="font-size:0.9rem;color:#92400E;">No te preocupes. Completá el formulario y al final creás tu cuenta con email y contraseña de forma rápida.</span>
+        </div>
       </div>
-    </div>
 
-    <form id="publicar-form" onsubmit="return handlePublicar(event)">
+      <form id="publicar-form" onsubmit="return handlePublicar(event)">
       <input type="hidden" id="anuncio-id" value="">
 
       <div class="form-group">
@@ -111,6 +113,7 @@
       </button>
       <a href="mis-avisos.html" id="cancelar-edicion" class="d-none btn-outline-custom w-100 justify-content-center mt-2">← Cancelar</a>
     </form>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
