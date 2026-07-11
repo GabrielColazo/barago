@@ -404,7 +404,6 @@ a:hover {
 }
 .card-anuncio .card-img-wrap {
   position: relative;
-  overflow: hidden;
   aspect-ratio: 1/1;
   background: #E5E7EB;
   border-radius: 8px 8px 0 0;
@@ -414,6 +413,7 @@ a:hover {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  border-radius: 8px 8px 0 0;
 }
 .card-anuncio .card-img-wrap .card-categoria-pill {
   position: absolute;
