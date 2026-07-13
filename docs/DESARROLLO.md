@@ -244,6 +244,8 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **Category pill positioning (jul 2026):** Nueva regla `.card-img-wrap .badge-categoria` con `position: absolute; top: 8px; left: 8px` — pill de categoría posicionado sobre la imagen, sin afectar chips de filtro.
 - **Publicar.html redesign (jul 2026):** Formulario envuelto en `.hoja-publicar` con estilo de "hoja" tipo planilla: fondo blanco, border-radius 10px, box-shadow suave, clip metálico simulado vía `::before` (gradiente gris, centrado arriba). Subtítulo `.pub-subtitle` cálido debajo del heading ("Gratis, sin comisión, directo a tu vecino."). Fondo #FAFAFA del body resalta la hoja blanca.
 - **SCSS sync (jul 2026):** Todos los cambios CSS acumulados (card-precio-tag, hero-subtitle/search, overflow fixes, hoja-publicar, categorías flex-wrap) sincronizados desde `main.css` a los parciales SCSS correspondientes (`_components.scss`, `_layout.scss`, `_anuncios.scss`). Compilado con `sass css/main.scss css/main.css`.
+- **Reglas modal overlay (jul 2026):** Panel "Antes de publicar" convertido de sidebar a modal centrado (`position: fixed; inset: 0`). Overlay con `backdrop-filter: blur(4px)`, animación de entrada `modalIn` (fade + scale), click-outside-to-close.
+- **Modal redesign (jul 2026):** Header con fondo `primary-light` y título `primary-dark`. Items de prohibición estilo chip con fondo `#FAFAFA`, `border-radius`, icono `🚫` separado del texto con `gap`. Footer con sello "Hecho en Baradero" italic. Close button con borde y hover definido. Estructura: `.reglas-header` → `.reglas-body` → `.reglas-footer`. Max-width responsive: 520px mobile, 560px desktop.
 
 ## ⚠️ REGLA CRÍTICA — SCSS partials
 
@@ -267,7 +269,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ## Estado actual (jul 2026)
 
-- Último commit: `2b6d06c` — Sync SCSS partials: restore card-precio-tag, hero styles, hoja-publicar
+- Último commit: `88ebd7a` — Modal redesign: header color, chip items, sello artesanal footer
 - Repo: `https://github.com/GabrielColazo/barashop`
 - URL: `https://gabrielcolazo.github.io/barashop/`
 
