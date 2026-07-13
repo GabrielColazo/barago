@@ -292,25 +292,18 @@ a:hover {
   gap: 0;
   transition: all 0.3s ease;
 }
-.footer .gaboweb-link .gw-bracket {
+.footer .gaboweb-link .gw-orange {
   color: #EA580C;
   transition: color 0.3s ease, transform 0.3s ease;
-}
-.footer .gaboweb-link span:not(.gw-bracket) {
-  color: white;
-  transition: color 0.3s ease;
 }
 .footer .gaboweb-link:hover {
   text-decoration: none;
   filter: drop-shadow(0 0 6px rgba(234, 88, 12, 0.5));
   transform: scale(1.05);
 }
-.footer .gaboweb-link:hover .gw-bracket {
+.footer .gaboweb-link:hover .gw-orange {
   color: #F59E0B;
   transform: scale(1.15);
-}
-.footer .gaboweb-link:hover span:not(.gw-bracket) {
-  color: #EA580C;
 }
 .footer a {
   color: #6EE7B7;

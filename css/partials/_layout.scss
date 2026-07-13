@@ -242,14 +242,9 @@
     gap: 0;
     transition: all 0.3s ease;
 
-    .gw-bracket {
+    .gw-orange {
       color: #EA580C;
       transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    span:not(.gw-bracket) {
-      color: white;
-      transition: color 0.3s ease;
     }
 
     &:hover {
@@ -257,13 +252,9 @@
       filter: drop-shadow(0 0 6px rgba(234, 88, 12, 0.5));
       transform: scale(1.05);
 
-      .gw-bracket {
+      .gw-orange {
         color: #F59E0B;
         transform: scale(1.15);
-      }
-
-      span:not(.gw-bracket) {
-        color: #EA580C;
       }
     }
   }
