@@ -350,32 +350,54 @@
     background: v.$surface;
     border-radius: v.$radius;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    max-width: 480px;
+    max-width: 520px;
     width: 100%;
     max-height: 85vh;
     overflow-y: auto;
-    padding: 1.5rem;
     position: relative;
-    border-top: 3px solid v.$danger;
+    display: flex;
+    flex-direction: column;
 
     @media (min-width: 576px) {
-      padding: 2rem;
+      max-width: 560px;
+    }
+  }
+
+  .reglas-header {
+    background: v.$primary-light;
+    padding: 1.25rem 1.5rem;
+    border-radius: v.$radius v.$radius 0 0;
+    border-bottom: 1px solid v.$border;
+
+    @media (min-width: 576px) {
+      padding: 1.5rem 2rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: v.$primary-dark;
+      margin: 0;
+
+      @media (min-width: 576px) {
+        font-size: 1.15rem;
+      }
     }
   }
 
   .reglas-close {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: v.$bg;
-    border: none;
-    font-size: 1.25rem;
+    top: 0.85rem;
+    right: 0.85rem;
+    background: v.$surface;
+    border: 1px solid v.$border;
+    font-size: 1.1rem;
     cursor: pointer;
     color: v.$text-secondary;
     z-index: 1;
     line-height: 1;
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -384,25 +406,24 @@
 
     &:hover {
       color: v.$text;
-      background: v.$border;
+      background: v.$bg;
+      border-color: v.$text-secondary;
+    }
+  }
+
+  .reglas-body {
+    padding: 1.25rem 1.5rem;
+    overflow-y: auto;
+
+    @media (min-width: 576px) {
+      padding: 1.5rem 2rem;
     }
   }
 
   .reglas-lista {
-    h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      color: v.$danger;
-
-      @media (min-width: 576px) {
-        font-size: 1.15rem;
-      }
-    }
-
     .reglas-titulo {
       font-size: 0.875rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       color: v.$text;
     }
 
@@ -410,40 +431,40 @@
       list-style: none;
       padding: 0;
       margin: 0 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
     }
 
     li {
-      font-size: 0.85rem;
+      font-size: 0.825rem;
       color: v.$text-secondary;
-      padding: 0.45rem 0.6rem;
-      padding-left: 1.5rem;
-      position: relative;
+      padding: 0.5rem 0.65rem;
+      background: v.$bg;
       border-radius: v.$radius-sm;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       transition: background v.$transition;
 
       @media (min-width: 576px) {
-        font-size: 0.9rem;
+        font-size: 0.875rem;
         padding: 0.5rem 0.75rem;
-      }
-
-      &:nth-child(odd) {
-        background: v.$bg;
+        gap: 0.6rem;
       }
 
       &:hover {
         background: v.$border;
       }
+    }
 
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 5px;
-        height: 5px;
-        background: v.$danger;
-        border-radius: 50%;
+    .reglas-icon {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      line-height: 1;
+
+      @media (min-width: 576px) {
+        font-size: 0.9rem;
       }
     }
   }
@@ -451,6 +472,7 @@
   .reglas-disclaimer {
     padding-top: 0.75rem;
     border-top: 1px solid v.$border;
+    margin-top: 0.25rem;
 
     p {
       font-size: 0.7rem;
@@ -462,6 +484,23 @@
       @media (min-width: 576px) {
         font-size: 0.75rem;
       }
+    }
+  }
+
+  .reglas-footer {
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid v.$border;
+    text-align: center;
+
+    @media (min-width: 576px) {
+      padding: 0.85rem 2rem;
+    }
+
+    .sello-artesanal {
+      font-size: 0.7rem;
+      color: v.$text-secondary;
+      opacity: 0.6;
+      font-style: italic;
     }
   }
 }
