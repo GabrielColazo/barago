@@ -334,9 +334,16 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  opacity: 0;
+  transition: opacity v.$transition-slow;
 
   &.reglas-abierto {
     display: flex;
+    opacity: 1;
+
+    .reglas-modal {
+      animation: modalIn 0.3s ease forwards;
+    }
   }
 
   .reglas-modal {
@@ -349,36 +356,52 @@
     overflow-y: auto;
     padding: 1.5rem;
     position: relative;
+    border-top: 3px solid v.$danger;
+
+    @media (min-width: 576px) {
+      padding: 2rem;
+    }
   }
 
   .reglas-close {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
-    background: none;
+    background: v.$bg;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     cursor: pointer;
     color: v.$text-secondary;
     z-index: 1;
     line-height: 1;
-    padding: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all v.$transition;
 
     &:hover {
       color: v.$text;
+      background: v.$border;
     }
   }
 
   .reglas-lista {
     h3 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
-      color: v.$text;
+      color: v.$danger;
+
+      @media (min-width: 576px) {
+        font-size: 1.15rem;
+      }
     }
 
     .reglas-titulo {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       margin-bottom: 0.5rem;
       color: v.$text;
     }
@@ -392,18 +415,33 @@
     li {
       font-size: 0.85rem;
       color: v.$text-secondary;
-      padding: 0.35rem 0;
-      padding-left: 1.25rem;
+      padding: 0.45rem 0.6rem;
+      padding-left: 1.5rem;
       position: relative;
+      border-radius: v.$radius-sm;
+      transition: background v.$transition;
+
+      @media (min-width: 576px) {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      &:nth-child(odd) {
+        background: v.$bg;
+      }
+
+      &:hover {
+        background: v.$border;
+      }
 
       &::before {
         content: '';
         position: absolute;
-        left: 0;
+        left: 0.5rem;
         top: 50%;
         transform: translateY(-50%);
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
         background: v.$danger;
         border-radius: 50%;
       }
@@ -415,11 +453,26 @@
     border-top: 1px solid v.$border;
 
     p {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: v.$text-secondary;
       line-height: 1.5;
       margin: 0;
-      opacity: 0.8;
+      opacity: 0.7;
+
+      @media (min-width: 576px) {
+        font-size: 0.75rem;
+      }
     }
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
