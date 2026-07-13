@@ -99,8 +99,8 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ## Diseño
 
-- Logo: imagen `barashop.webp` en header
-- Header: fondo blanco semitransparente (rgba 255,255,255,0.97), backdrop-filter blur, borde inferior gris suave, shadow sutil. Botón "Publicar" con clase `.btn-publicar` (verde, compacto, SVG plus). Dropdown de usuario animado (fadeDown).
+- Logo: imagen `barashop.webp` (fondo blanco #FFFFFF) en header, tamaño 92px (64px mobile)
+- Header: fondo blanco #FFFFFF, backdrop-filter blur, borde inferior gris suave, shadow sutil. Botón "Publicar" verde lima #84cc16 (hover #65a30d). Dropdown de usuario animado (fadeDown).
 - Hero: compacto (padding 1.5rem), fondo gradiente verde (#D1FAE5 → #A7F3D0 → #FAFAFA), título chico 1.15rem, barra de búsqueda redonda con lupa SVG integrada (`.hero-search`). Foto de fondo `imagenbaradero.webp` vía pseudo-elemento `::before` con overlay gradiente semitransparente (opacidad 0.75–0.85), fallback al gradiente si no carga la imagen. Mobile: background-position center 30%.
 - Categorías: chips con `flex-wrap` (`.categorias-scroll`), outline white, active verde sólido. Todas visibles de una, sin scroll horizontal.
 - Cards (`.card-anuncio`): 1:1 aspect ratio, imagen cover, pill de categoría overlay posicionado arriba-izquierda (`.card-img-wrap .badge-categoria`), precio como tag naranja (#EA580C) superpuesto abajo-izquierda (`.card-precio-tag`), meta compacta. Hover: translateY(-6px) + shadow. Clavito decorativo arriba-centro. Overflow visible para tag y clavito.
@@ -108,8 +108,8 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - Skeleton (`.card-skeleton`): 1:1 ratio, pulse animation.
 - Mis avisos: misma card-anuncio/grid-anuncios que index, con barra de acciones extra abajo (`.card-acciones-mis-avisos`).
 - Footer: fondo verde oscuro (#065F46), texto blanco semitransparente, enlaces en #6EE7B7.
-- Tipografía: Inter (Google Fonts)
-- Colores principales: #059669 (verde), #F59E0B (acento)
+- Tipografía: Montserrat (Google Fonts, pesos 400-800), fallback: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif
+- Colores principales: #84cc16 (verde lima), #65a30d (verde lima oscuro/hover), #059669 (verde), #F59E0B (acento)
 
 ## Correcciones aplicadas
 
@@ -182,7 +182,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **login.html:** botón "Ingresar con Google" con ícono G estilizado, separador "o", link "Enviar link mágico"
 - **auth.js:** funciones `iniciarSesionGoogle()` (fallback OAuth), `enviarMagicLink()`, constante `AUTH_REDIRECT`
 - **Responsive design (mobile-first):** jul 2026
-  - Logo responsive: 40px mobile / 48px tablet / 56px desktop
+  - Logo responsive: 64px mobile / 92px desktop
   - Hero: padding y títulos escalan con `min-width` (576px y 992px)
   - Grid de anuncios: `minmax(160px, 1fr)` mobile → `220px` tablet → `270px` desktop
   - Detalle anuncio: header en columna en mobile, fila en tablet+
@@ -249,6 +249,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **GaboWeb link branding (jul 2026):** Link "Desarrollado por `<GaboWeb/>`" en footer de todas las páginas (index, publicar, login, mis-avisos, anuncio) con colores de marca: `<` naranja `#EA580C`, `GABO` blanco, `WEB/>` naranja. Hover: `drop-shadow` naranja + `scale(1.05)` + brackets achicados en amarillo `#F59E0B`. Clase `.gaboweb-link` con `.gw-orange` para los spans naranjas.
 - **Pub-subtitle simplificado (jul 2026):** Subtítulo de publicar cambiado de "Gratis, sin comisión, directo a tu vecino." a "Gratis, sin comisión."
 - **Categoría Mundial 2026 (jul 2026):** Nueva categoría "Figuritas Mundial 2026" con icono 🏆 agregada directamente en la DB de Supabase (tabla `categorias`).
+- **Sesión 13 jul 2026:** Logo reemplazado de SVG inline a imagen `barashop.webp` con fondo blanco. Tamaño 92px desktop / 64px mobile. Fondo nav cambiado a #FFFFFF. Botón Publicar y "Baradero" en hero cambiados a verde lima #84cc16. Tipografía cambiada de Inter a Montserrat.
 
 ## ⚠️ REGLA CRÍTICA — SCSS partials
 
