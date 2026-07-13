@@ -30,7 +30,6 @@
     <h1 id="pub-heading">📸 Publicá tu anuncio</h1>
     <p class="pub-subtitle">Gratis, sin comisión, directo a tu vecino.</p>
 
-    <div class="publicar-layout">
     <div class="hoja-publicar">
       <div id="alerta-registro" class="d-none" style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:0.75rem;">
         <span style="font-size:1.5rem;">⚠️</span>
@@ -137,7 +136,6 @@
         <p>BaraShop es un espacio de intercambio entre vecinos y no interviene en las transacciones. No nos hacemos responsables por la veracidad, calidad, legalidad o estado de los productos y servicios publicados por los usuarios. La responsabilidad es exclusiva de quien publica el aviso. Nos reservamos el derecho de eliminar cualquier publicación que incumpla estas normas.</p>
       </div>
     </aside>
-    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -151,15 +149,7 @@
     function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML }
 
     function cerrarReglas() {
-      const panel = document.getElementById('reglas-panel')
-      panel.classList.remove('reglas-abierto')
-      localStorage.setItem('reglas-cerradas', '1')
-    }
-
-    function mostrarReglasMobile() {
-      if (window.innerWidth < 992 && !localStorage.getItem('reglas-cerradas')) {
-        document.getElementById('reglas-panel').classList.add('reglas-abierto')
-      }
+      document.getElementById('reglas-panel').classList.add('reglas-cerrado')
     }
 
     async function init() {
@@ -496,7 +486,6 @@
     })
 
     init()
-    mostrarReglasMobile()
   </script>
 
   <footer class="footer">
