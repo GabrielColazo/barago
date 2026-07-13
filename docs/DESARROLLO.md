@@ -243,6 +243,19 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **Card-img-wrap overflow fix (jul 2026):** Eliminado `overflow: hidden` de `.card-img-wrap` para que `.card-precio-tag` no se corte. Border-radius aplicado directamente a `.card-img`.
 - **Category pill positioning (jul 2026):** Nueva regla `.card-img-wrap .badge-categoria` con `position: absolute; top: 8px; left: 8px` — pill de categoría posicionado sobre la imagen, sin afectar chips de filtro.
 - **Publicar.html redesign (jul 2026):** Formulario envuelto en `.hoja-publicar` con estilo de "hoja" tipo planilla: fondo blanco, border-radius 10px, box-shadow suave, clip metálico simulado vía `::before` (gradiente gris, centrado arriba). Subtítulo `.pub-subtitle` cálido debajo del heading ("Gratis, sin comisión, directo a tu vecino."). Fondo #FAFAFA del body resalta la hoja blanca.
+- **SCSS sync (jul 2026):** Todos los cambios CSS acumulados (card-precio-tag, hero-subtitle/search, overflow fixes, hoja-publicar, categorías flex-wrap) sincronizados desde `main.css` a los parciales SCSS correspondientes (`_components.scss`, `_layout.scss`, `_anuncios.scss`). Compilado con `sass css/main.scss css/main.css`.
+
+## ⚠️ REGLA CRÍTICA — SCSS partials
+
+> **NUNCA editar `css/main.css` directamente.** Todo el CSS va en los parciales SCSS (`css/partials/_*.scss`). Después compilar con `sass css/main.scss css/main.css`.
+>
+> Si editás `main.css` directamente, la próxima vez que alguien ejecute `sass` se sobrescriben todos los cambios perdidos. Esto ya pasó y causó la pérdida de estilos del precio, hero, y hoja-publicar.
+>
+> **Flujo correcto:**
+> 1. Editar el `.scss` parcial correspondiente
+> 2. Compilar: `sass css/main.scss css/main.css`
+> 3. Verificar que el cambio aparezca en el navegador
+> 4. Commitear AMBOS archivos (`.scss` y `.css`)
 
 ## Pendientes
 
@@ -254,7 +267,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ## Estado actual (jul 2026)
 
-- Último commit: `44c8d67` — Publicar.html redesign: hoja publicar con clip metálico y subtítulo cálido
+- Último commit: `2b6d06c` — Sync SCSS partials: restore card-precio-tag, hero styles, hoja-publicar
 - Repo: `https://github.com/GabrielColazo/barashop`
 - URL: `https://gabrielcolazo.github.io/barashop/`
 
