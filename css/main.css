@@ -42,7 +42,7 @@ a:hover {
 }
 
 .header {
-  background: rgba(255, 255, 255, 0.97);
+  background: #FAFDF5;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid #E5E7EB;
@@ -65,12 +65,12 @@ a:hover {
   line-height: 1;
 }
 .header .logo-text img {
-  height: 32px;
+  height: 44px;
   width: auto;
 }
 @media (max-width: 575px) {
   .header .logo-text img {
-    height: 26px;
+    height: 34px;
   }
 }
 .header .btn-publicar {

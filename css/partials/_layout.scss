@@ -1,7 +1,7 @@
 @use 'variables' as v;
 
 .header {
-  background: rgba(255, 255, 255, 0.97);
+  background: #FAFDF5;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid v.$border;
@@ -25,12 +25,12 @@
     line-height: 1;
 
     img {
-      height: 32px;
+      height: 44px;
       width: auto;
     }
 
     @media (max-width: 575px) {
-      img { height: 26px; }
+      img { height: 34px; }
     }
   }
 
