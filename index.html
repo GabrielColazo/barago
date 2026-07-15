@@ -45,7 +45,7 @@
 
   <section class="hero">
     <div class="container">
-      <p class="hero-subtitle">El clasificado de <span class="palabra-destacada">Baradero</span></p>
+      <p class="hero-subtitle">El clasificado de <span class="palabra-destacada">Baradero</span>: publicá, buscá, encontrá lo que necesitás.</p>
       <div class="hero-search">
         <span class="hero-search-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -228,6 +228,32 @@
 
     cargarCategorias()
     cargarAnuncios()
+  </script>
+
+  <div id="promo-banner" class="promo-banner d-none">
+    <button class="promo-banner-close" id="promo-banner-close" aria-label="Cerrar">✕</button>
+    <p class="promo-banner-text">Publicá tu anuncio gratis por tiempo limitado</p>
+    <a href="publicar.html" class="promo-banner-cta">Publicar</a>
+  </div>
+
+  <script>
+    function mostrarPromoBanner() {
+      if (sessionStorage.getItem('barashop_promo_visto')) return
+      const banner = document.getElementById('promo-banner')
+      setTimeout(() => {
+        banner.classList.remove('d-none')
+        requestAnimationFrame(() => banner.classList.add('promo-banner-visible'))
+      }, 1500)
+    }
+
+    document.getElementById('promo-banner-close').addEventListener('click', () => {
+      const banner = document.getElementById('promo-banner')
+      banner.classList.remove('promo-banner-visible')
+      sessionStorage.setItem('barashop_promo_visto', '1')
+      setTimeout(() => banner.classList.add('d-none'), 200)
+    })
+
+    mostrarPromoBanner()
   </script>
 </body>
 </html>
