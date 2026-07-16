@@ -419,3 +419,46 @@
     text-decoration: underline;
   }
 }
+
+.link-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #6B7280;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    color: #059669;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.pildora-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #047857;
+  background: #D1FAE5;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #A7F3D0;
+    color: #047857;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
