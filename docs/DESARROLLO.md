@@ -252,6 +252,8 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **Sesión 13 jul 2026:** Logo reemplazado de SVG inline a imagen `barashop.webp` con fondo blanco. Tamaño 92px desktop / 64px mobile. Fondo nav cambiado a #FFFFFF. Botón Publicar y "Baradero" en hero cambiados a verde lima #84cc16. Tipografía cambiada de Inter a Montserrat.
 - **Hero tagline (jul 2026):** Nueva línea debajo del título: "Un solo lugar para publicar, buscar y encontrar lo que necesitás." en cursiva, color gris secundario (#6B7280).
 - **Banner promo flotante (jul 2026):** Notificación discreta esquina inferior derecha (mobile: centrado abajo). Texto "Publicá tu anuncio gratis por tiempo limitado" con botón "Publicar" verde #059669. Una vez por sesión via `sessionStorage`. Delay 1.5s, transición 200ms sin rebote. Estilo: fondo blanco, border-radius 16px, sombra suave.
+- **Política de Privacidad (jul 2026):** Nueva página `privacidad.html` con política completa (8 secciones: datos, uso, almacenamiento, público, derechos, menores, cambios, contacto). Clase `.pagina-legal` en `_layout.scss`: max-width 720px, line-height 1.6, estilos para h1/h2/p/ul/a. Link en footer de todas las páginas con clase `.footer-link` (blanco sólido #ffffff, underline permanente).
+- **Aviso de privacidad en registro (jul 2026):** Texto informativo "Al registrarte, aceptás nuestra Política de Privacidad" en `login.html` (visible solo en modo registro, se oculta con `d-none` al toggle) y `publicar.html` (debajo del botón "Registrarse"). Clase `.aviso-privacidad-registro`: font 0.8rem, gris #6B7280, link verde #059669.
 
 ## ⚠️ REGLA CRÍTICA — SCSS partials
 
@@ -275,7 +277,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ## Estado actual (jul 2026)
 
-- Último commit: `70443f1` — Hero tagline + banner promo flotante
+- Último commit: `177ff66` — Merge prueba: política de privacidad, aviso registro, footer-link fix
 - Repo: `https://github.com/GabrielColazo/barashop`
 - URL: `https://gabrielcolazo.github.io/barashop/`
 
@@ -290,6 +292,7 @@ barashop/
 ├── publicar.html             # Publicar anuncio (registro inline)
 ├── anuncio.html              # Detalle del anuncio con galería
 ├── auth-callback.html         # Callback OAuth (reserva para PKCE)
+├── privacidad.html            # Política de Privacidad
 ├── schema.sql                # SQL completo de la DB (fuente única)
 ├── migraciones_aplicadas/    # Migraciones históricas (referencia)
 ├── css/
