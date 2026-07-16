@@ -254,6 +254,10 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 - **Banner promo flotante (jul 2026):** Notificación discreta esquina inferior derecha (mobile: centrado abajo). Texto "Publicá tu anuncio gratis por tiempo limitado" con botón "Publicar" verde #059669. Una vez por sesión via `sessionStorage`. Delay 1.5s, transición 200ms sin rebote. Estilo: fondo blanco, border-radius 16px, sombra suave.
 - **Política de Privacidad (jul 2026):** Nueva página `privacidad.html` con política completa (8 secciones: datos, uso, almacenamiento, público, derechos, menores, cambios, contacto). Clase `.pagina-legal` en `_layout.scss`: max-width 720px, line-height 1.6, estilos para h1/h2/p/ul/a. Link en footer de todas las páginas con clase `.footer-link` (blanco sólido #ffffff, underline permanente).
 - **Aviso de privacidad en registro (jul 2026):** Texto informativo "Al registrarte, aceptás nuestra Política de Privacidad" en `login.html` (visible solo en modo registro, se oculta con `d-none` al toggle) y `publicar.html` (debajo del botón "Registrarse"). Clase `.aviso-privacidad-registro`: font 0.8rem, gris #6B7280, link verde #059669.
+- **Términos y Condiciones (jul 2026):** Nueva página `terminos.html` con 12 secciones de términos legales. Link "Volver al inicio" arriba y abajo (clase `.link-volver`). Link a Política de Privacidad al final. Footer actualizado en todas las páginas con ambos links legales en línea separada.
+- **Botones Volver (jul 2026):** `.link-volver` para páginas legales (gris → verde en hover) y `.pildora-volver` para publicar.html (fondo #D1FAE5, border-radius 999px).
+- **Validación precio $0 (jul 2026):** Fix para que el check de "precio mayor a $0" se alcance cuando el valor es `"0"` (cambio de `!precio` a `precio === ''`). Mensaje actualizado con link a categoría Donaciones que selecciona la categoría automáticamente.
+- **Badge GRATIS Donaciones (jul 2026):** Al seleccionar categoría "Donaciones": precio tachado (`line-through`), deshabilitado, badge `🎁 GRATIS` verde (#D1FAE5), aviso "Este anuncio va en la categoría Donaciones y no tiene costo". Al cambiar de categoría: precio vuelve a la normalidad. Excepción en validación $0 para Donaciones. Lectura de precio: `disabled ? '0' : value`.
 
 ## ⚠️ REGLA CRÍTICA — SCSS partials
 
@@ -277,7 +281,7 @@ connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net
 
 ## Estado actual (jul 2026)
 
-- Último commit: `177ff66` — Merge prueba: política de privacidad, aviso registro, footer-link fix
+- Último commit: `98a7ada` — Merge prueba: términos, botones volver, badge GRATIS donaciones
 - Repo: `https://github.com/GabrielColazo/barashop`
 - URL: `https://gabrielcolazo.github.io/barashop/`
 
@@ -293,6 +297,7 @@ barashop/
 ├── anuncio.html              # Detalle del anuncio con galería
 ├── auth-callback.html         # Callback OAuth (reserva para PKCE)
 ├── privacidad.html            # Política de Privacidad
+├── terminos.html              # Términos y Condiciones
 ├── schema.sql                # SQL completo de la DB (fuente única)
 ├── migraciones_aplicadas/    # Migraciones históricas (referencia)
 ├── css/
